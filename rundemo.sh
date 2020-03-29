@@ -1,0 +1,2 @@
+./builddemo.sh
+./a.out
