@@ -1,2 +1,2 @@
 ./builddemo.sh
-./a.out
+GDK_BACKEND=wayland ./a.out

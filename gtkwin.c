@@ -1,5 +1,5 @@
 #include <gtk/gtk.h>
-
+#include <wayland-client.h>
 
 GtkWindow *window;
 
@@ -10,7 +10,7 @@ int close_pressed = FALSE;
 
 void update_window(){
   gtk_window_set_title(window, title);
-  gtk_window_set_default_size(window, width, height);
+  gtk_window_resize(window, width, height);
 }
 
 void gtk_set_title(char* t){
@@ -33,6 +33,7 @@ int is_close_button_pressed(){
 }
 
 void gtk_refresh_window(){
+  gtk_window_get_size(window, &width, &height);
   close_pressed=FALSE;
   gtk_main_iteration_do(FALSE);
 }
