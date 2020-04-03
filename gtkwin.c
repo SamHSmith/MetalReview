@@ -1,4 +1,6 @@
 #include <gtk/gtk.h>
+#include <gdk/gdkwayland.h>
+#include <gdk/wayland/gdkwaylandwindow.h>
 #include <wayland-client.h>
 
 GtkWindow *window;
@@ -8,7 +10,14 @@ char* title = "Sick title";
 int width = 640; int height = 480;
 int close_pressed = FALSE;
 
+void wayland_surface(){
+  GdkWindow *gdk_window = gtk_widget_get_window(GTK_WIDGET(window));
+  struct wl_surface *surface = gdk_wayland_window_get_wl_surface(gdk_window);
+  printf("%p\n", surface);
+}
+
 void update_window(){
+  gtk_window_set_decorated(window,TRUE);
   gtk_window_set_title(window, title);
   gtk_window_resize(window, width, height);
 }
@@ -36,6 +45,7 @@ void gtk_refresh_window(){
   gtk_window_get_size(window, &width, &height);
   close_pressed=FALSE;
   gtk_main_iteration_do(FALSE);
+  wayland_surface();
 }
 
 void gtk_show_window(){
@@ -61,6 +71,6 @@ void gtk_create_window_and_show(int w, int h, char* t){
 }
 
 void gtk_init_gtk(){
-  gtk_init(0, NULL);
+  gtk_init(0,NULL);
 }
 
