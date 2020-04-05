@@ -10,10 +10,10 @@ char* title = "Sick title";
 int width = 640; int height = 480;
 int close_pressed = FALSE;
 
-void wayland_surface(){
+struct wl_surface *gtk_wayland_surface(){
   GdkWindow *gdk_window = gtk_widget_get_window(GTK_WIDGET(window));
   struct wl_surface *surface = gdk_wayland_window_get_wl_surface(gdk_window);
-  printf("%p\n", surface);
+  return surface;
 }
 
 void update_window(){
@@ -45,7 +45,6 @@ void gtk_refresh_window(){
   gtk_window_get_size(window, &width, &height);
   close_pressed=FALSE;
   gtk_main_iteration_do(FALSE);
-  wayland_surface();
 }
 
 void gtk_show_window(){
