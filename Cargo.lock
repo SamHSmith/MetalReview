@@ -10,7 +10,14 @@ name = "metal_review"
 version = "0.1.0"
 dependencies = [
  "libc 0.2.68 (registry+https://github.com/rust-lang/crates.io-index)",
+ "vk-sys 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
+
+[[package]]
+name = "vk-sys"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [metadata]
 "checksum libc 0.2.68 (registry+https://github.com/rust-lang/crates.io-index)" = "dea0c0405123bba743ee3f91f49b1c7cfb684eef0da0a50110f758ccf24cdff0"
+"checksum vk-sys 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)" = "c24c107c0402856ad434d2dc0f3dbdc68c9e170e8bab0f27aa82a282d234d57c"

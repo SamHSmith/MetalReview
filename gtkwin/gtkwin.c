@@ -2,6 +2,8 @@
 #include <gdk/gdkwayland.h>
 #include <gdk/wayland/gdkwaylandwindow.h>
 #include <wayland-client.h>
+#include <vulkan/vulkan.h>
+#include <vulkan/vulkan_wayland.h>
 
 GtkWindow *window;
 
@@ -10,9 +12,20 @@ char* title = "Sick title";
 int width = 640; int height = 480;
 int close_pressed = FALSE;
 
-void vulkan_surface(){
+VkSurfaceKHR gtk_get_vulkan_surface(VkInstance instance){
   GdkWindow *gdk_window = gtk_widget_get_window(GTK_WIDGET(window));
   struct wl_surface *surface = gdk_wayland_window_get_wl_surface(gdk_window);
+
+  VkSurfaceKHR vksurf;
+  VkWaylandSurfaceCreateInfoKHR createinfo;
+  createinfo.sType= VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR;
+  createinfo.pNext= NULL;
+  createinfo.flags = 0;
+  createinfo.display = gdk_wayland_display_get_wl_display(gdk_window_get_display(gdk_window));
+  createinfo.surface=surface;
+
+  VkResult result = vkCreateWaylandSurfaceKHR(instance,&createinfo,NULL,&vksurf);
+  return vksurf;
 }
 
 void update_window(){
@@ -36,7 +49,7 @@ void close_button_pressed(){
   close_pressed=TRUE;
 }
 
-int is_close_button_pressed(){
+int gtk_is_close_button_pressed(){
   return close_pressed;
 }
 

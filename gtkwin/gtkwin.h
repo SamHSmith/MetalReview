@@ -3,7 +3,7 @@ void gtk_set_title(char* t);
 
 void gtk_set_size(int w, int h);
 
-int is_close_button_pressed();
+int gtk_is_close_button_pressed();
 
 void gtk_refresh_window();
 
